@@ -1,0 +1,47 @@
+{
+    "env": {
+        "browser": true,
+        "commonjs": true,
+        "es2023": true
+    },
+    "extends": ["eslint:recommended"],
+    "parserOptions": {
+        "ecmaVersion": "latest"
+    },
+    "rules": {
+        "no-unused-vars": "error",
+        "semi": ["error", "always"],
+        "comma-spacing": "error",
+        "no-extra-semi": "error",
+        "quotes": ["off", "double", { "avoidEscape": true }],
+        "no-var": "off",
+        "no-trailing-spaces": "error"
+    },
+    "overrides": [
+        {
+            "files": ["js/**/*.ts", "build.ts"],
+            "extends": [
+                "eslint:recommended",
+                "plugin:@typescript-eslint/recommended",
+                "plugin:@typescript-eslint/recommended-requiring-type-checking"
+            ],
+            "parser": "@typescript-eslint/parser",
+            "parserOptions": {
+                "project": ["./tsconfig.json"]
+            },
+            "plugins": ["@typescript-eslint", "import"],
+            "rules": {
+                "no-unused-vars": "off",
+                "@typescript-eslint/consistent-type-definitions": ["error", "interface"],
+                "@typescript-eslint/consistent-type-imports": "error",
+                "@typescript-eslint/prefer-ts-expect-error": "error",
+                "@typescript-eslint/no-inferrable-types": "off",
+                "@typescript-eslint/no-this-alias": "off",
+                "@typescript-eslint/no-non-null-assertion": "off",
+                "@typescript-eslint/no-unused-vars": "error",
+                "@typescript-eslint/restrict-plus-operands": "off",
+                "import/consistent-type-specifier-style": ["error", "prefer-top-level"]
+            }
+        }
+    ]
+}

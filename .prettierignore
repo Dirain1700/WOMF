@@ -1,0 +1,12 @@
+package.json
+package-lock.json
+.eslintrc.json
+.upm/*
+.cache/*
+.config/*
+dist/*
+build.*
+!build.ts
+index.js
+node_modules/*
+*.html

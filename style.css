@@ -1,0 +1,194 @@
+@import url("https://play.pokemonshowdown.com/style/battle-log.css");
+
+html,
+body {
+    font-family: "Noto Sans JP", sans-serif;
+    border: none;
+}
+
+html {
+    height: 100%;
+    width: 100%;
+    background-color: powderblue;
+}
+
+body {
+    margin: 2em;
+    padding: 0px;
+    background-color: white;
+}
+
+p,
+ul,
+td,
+th,
+button,
+input {
+    font-family: "Noto Sans JP", sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+p {
+    line-hight: 100%;
+}
+
+html,
+body,
+input {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-appearance: none;
+}
+
+table[border="1"],
+table[border="1"] th,
+table[border="1"] td {
+    width: max-content;
+    border-spacing: 0;
+    vertical-align: middle;
+    font-weight: 500;
+    padding: 0;
+}
+
+table[border="1"] th,
+table[border="1"] td {
+    border: 1px solid black;
+    border-collapse: collapse;
+    height: 100%;
+    background-color: white;
+    align-items: center;
+    text-align: center;
+    margin: 5%;
+}
+
+table[border="1"] td {
+    font-family: "Noto Sans JP", sans-serif;
+    vertical-align: bottom;
+}
+
+table[border="1"]#table {
+    border: 1px solid white;
+    border-collapse: collapse;
+    outline: none;
+    height: 100%;
+    background-color: black;
+    max-width: 100%;
+    position: relative;
+}
+
+div#tableparent {
+    width: 100%;
+    overflow-x: auto;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+    padding: 0 0 5px 0;
+}
+
+input[type="text"].username {
+    font-size: 16px;
+    width: 120px;
+    maxlength: 20;
+    border: none;
+    border-radius: 0;
+    outline: none;
+    text-align: center;
+}
+
+input[type="number"].point {
+    font-size: 16px;
+    width: 80px;
+    maxlength: 4;
+    border: none;
+    border-radius: 0;
+    outline: none;
+    text-align: center;
+}
+
+input[type="number"].disabled-point {
+    font-size: 16px;
+    width: 80px;
+    maxlength: 4;
+    border: none;
+    border-radius: 0;
+    outline: none;
+    text-align: center;
+    background-color: dimgray;
+}
+
+input[type="number"] {
+    font-size: 16px;
+    height: 100%;
+    border: 1px solid #black;
+}
+
+p#players {
+    font-weight: 500;
+    height: 100%;
+    margin: 20px 0 10px 0;
+}
+
+p.status {
+    width: 110px;
+    height: 100%;
+    font-weight: 400;
+    text-align: center;
+}
+
+button.button.tool {
+    font-family: "Noto Sans JP", sans-serif;
+    display: inline-block;
+
+    /* default colors */
+    color: #030303;
+    border: solid 1px deepskyblue;
+    background: powderblue;
+    font-size: 12pt;
+    padding: 3px 8px;
+}
+
+.infobox {
+    border: 2.5px dashed black;
+    padding: 2px 4px;
+    position: relative;
+}
+
+button#copyplayer {
+    margin: 0;
+}
+
+div#toolbox {
+    width: 100%;
+}
+
+div#toolbox div.infobox {
+    width: 100%;
+    height: 80px;
+    max-width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
+div#toolbox ul li {
+    align-items: center;
+    display: inline-block;
+    padding: 10px 0;
+    margin: 10px 8px;
+    vertical-align: middle;
+    font-weight: 400;
+    color: #232323;
+    white-space: nowrap;
+}
+
+div#toolbox ul {
+    list-style-type: none;
+    text-align: center;
+}
+
+div#toolbox ul li button {
+    margin: 0;
+}
