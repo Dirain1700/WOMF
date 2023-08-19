@@ -9,7 +9,7 @@ export class Tools {
         '<td width="110px"><p class="status"></p></td>',
         "</tr>",
     ].join("\n");
-    pointInput = '<td width="80px"><input type="number" class="point"></td>';
+    pointInput = '<td width="80px"><input type="text" class="point"></td>';
     players = new Collection<number, IPlayerData>();
     playersElement = new Collection<number, NodeListOf<HTMLTableCellElement>>();
 
@@ -227,8 +227,9 @@ export class Tools {
             }
 
             case "ArrowRight": {
-                const isSelectionAtEnd =
-                    currentFocus.selectionStart === currentFocus.selectionEnd && currentFocus.selectionEnd === currentFocus.value.length;
+                const isSelectionAtEnd = currentFocus.value.length
+                    ? currentFocus.selectionStart === currentFocus.selectionEnd && currentFocus.selectionEnd === currentFocus.value.length
+                    : true;
                 if (currentRound + 1 === row || !isSelectionAtEnd) return;
                 targetRow += row === 0 ? 2 : 1;
                 break;
@@ -246,7 +247,7 @@ export class Tools {
             }
 
             case "ArrowLeft": {
-                const isSelectionAtStart = currentFocus.selectionStart === currentFocus.selectionEnd && !currentFocus.selectionStart;
+                const isSelectionAtStart = currentFocus.selectionStart === currentFocus.selectionEnd && !currentFocus.selectionEnd;
                 if (!row || !isSelectionAtStart) return;
                 targetRow -= row === 2 ? 2 : 1;
                 break;
@@ -274,6 +275,8 @@ export class Tools {
         input.focus();
         input.select();
         event.preventDefault();
+        const forward = event.key === "ArrowRight";
+        input.setSelectionRange(forward ? 0 : input.value.length, forward ? 0 : input.value.length, "none");
     }
 
     updatePlayerList(fromButton?: boolean): void {
