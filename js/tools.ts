@@ -19,7 +19,7 @@ export class Tools {
     instance(): void {
         const copyPlayer = document.getElementById("copyplayer");
         if (!copyPlayer) throw new Error("A button which has an id named copyplayer not found");
-        copyPlayer.addEventListener("click", () => void this.clipPlayers());
+        copyPlayer.addEventListener("click", () => void this.clipPlayers(true));
 
         const addPlayer = document.getElementById("addplayer");
         if (!addPlayer) throw new Error("A button which has an id named addplayer not found");
@@ -276,7 +276,7 @@ export class Tools {
         event.preventDefault();
     }
 
-    updatePlayerList(): void {
+    updatePlayerList(fromButton?: boolean): void {
         const playerListElement = document.getElementById("players");
         if (!playerListElement) throw new Error("Could not update players");
         const players = this.players.filter((p) => !this.isEmptyName(p.name) && p.status === "Playing");
@@ -298,6 +298,7 @@ export class Tools {
                     return sumPoint ? p.name + "(" + this.addAll(p.rounds) + ")" : p.name;
                 })
                 .join(", ");
+        if (!fromButton && possibleRound !== round && round !== 1) void this.clipPlayers(false);
     }
 
     addTableColumn(column?: number): void {
@@ -426,8 +427,8 @@ export class Tools {
         this.getTableData(true, true);
     }
 
-    clipPlayers(): Promise<void> {
-        this.updatePlayerList();
+    clipPlayers(fromButton?: boolean): Promise<void> {
+        if (fromButton) this.updatePlayerList(fromButton);
         const text = document.getElementById("players")?.textContent;
         if (!text) throw new Error("Could not get players data");
         const [beforeColon, afterColon] = text.split(":");
