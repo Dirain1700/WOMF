@@ -356,7 +356,7 @@ export class Tools {
         return [
             '<th id="users" rowspan="2">Users</th>',
             '<th rowspan="2">Status</th>',
-            `<th colspan="${rounds || 1}"><span style=font-weight: 400;">Rounds</span></th>`,
+            `<th colspan="${rounds || 1}"><span style=font-weight: 400;">Points</span></th>`,
         ].join("\n");
     }
 
