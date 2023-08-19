@@ -194,30 +194,32 @@ div#toolbox {
 }
 
 div#toolbox div.infobox {
-    width: 100%;
+    width: 90%;
     height: 80px;
+    padding: 8px 12px 0 12px;
+    text-align: center;
     max-width: 100%;
-    display: flex;
+    display: inline-block;
     align-items: center;
-    justify-content: center;
-    overflow-x: auto;
     white-space: nowrap;
+    overflow-x: scroll;
 }
 
 div#toolbox ul li {
     align-items: center;
-    display: inline-block;
     padding: 10px 0;
     margin: 10px 8px;
     vertical-align: middle;
     font-weight: 400;
     color: #232323;
-    white-space: nowrap;
+    display: inline-block;
+    white-space: normal;
 }
 
 div#toolbox ul {
     list-style-type: none;
     text-align: center;
+    white-space: nowrap;
 }
 
 div#toolbox ul li button {
