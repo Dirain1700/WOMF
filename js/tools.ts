@@ -350,7 +350,7 @@ export class Tools {
 
     getHeaders(rounds: number): string {
         return [
-            '<th rowspan="2">Users</th>',
+            '<th id="users" rowspan="2">Users</th>',
             '<th rowspan="2">Status</th>',
             `<th colspan="${rounds || 1}"><span style=font-weight: 400;">Rounds</span></th>`,
         ].join("\n");
