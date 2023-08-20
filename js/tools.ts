@@ -516,7 +516,7 @@ export class Tools {
             .replace(/[^\d]/g, "");
 
         downloadElement.href = URL.createObjectURL(blob);
-        downloadElement.download = localizedDate + "womf_table.json";
+        downloadElement.download = localizedDate + "_womf_table.json";
     }
 
     downloadAsCSV() {
@@ -530,7 +530,7 @@ export class Tools {
             .replace(/[^\d]/g, "");
 
         downloadElement.href = URL.createObjectURL(blob);
-        downloadElement.download = localizedDate + "womf_table.csv";
+        downloadElement.download = localizedDate + "_womf_table.csv";
     }
 
     writeClipboard(text: string): Promise<void> {
