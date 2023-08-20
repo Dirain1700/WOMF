@@ -51,8 +51,8 @@ export class Tools {
         downloadJSON.addEventListener("click", () => this.downloadAsJSON());
 
         const downloadCSV = document.getElementById("downloadcsv");
-        if (!downloadJSON) throw new Error("An anchor which has an id named downloadcsv not found");
-        downloadJSON.addEventListener("click", () => this.downloadAsCSV());
+        if (!downloadCSV) throw new Error("An anchor which has an id named downloadcsv not found");
+        downloadCSV.addEventListener("click", () => this.downloadAsCSV());
     }
 
     getTableElement(): HTMLElement {
