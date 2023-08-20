@@ -40,6 +40,10 @@ export class Tools {
         const removeRound = document.getElementById("removeround");
         if (!removeRound) throw new Error("A button which has an id named removeround not found");
         removeRound.addEventListener("click", () => this.removeBattleRound(this.getCurrentRound() ?? 1, true));
+
+        const clearData = document.getElementById("cleardata");
+        if (!clearData) throw new Error("A button which has an id named cleardata not found");
+        clearData.addEventListener("click", () => this.clearData(true));
     }
 
     getTableElement(): HTMLElement {
@@ -340,6 +344,8 @@ export class Tools {
                             if (!sureToDelete) return;
                         }
                         itemElement.oninput = null;
+                        itemElement.onkeydown = null;
+                        itemElement.remove();
                     }
                 }
                 row.remove();
@@ -424,6 +430,11 @@ export class Tools {
             } else {
                 const targetRound = tableRowElements[i]!.querySelectorAll("td")[index + 2];
                 if (!targetRound) continue;
+                if (this.isInputElement(targetRound.firstElementChild)) {
+                    targetRound.firstElementChild.oninput = null;
+                    targetRound.firstElementChild.onkeydown = null;
+                    targetRound.firstElementChild.remove();
+                }
                 targetRound.remove();
             }
         }
@@ -437,6 +448,22 @@ export class Tools {
         const [beforeColon, afterColon] = text.split(":");
 
         return this.writeClipboard("**" + beforeColon + "**:" + afterColon);
+    }
+
+    clearData(fromButton?: boolean): void {
+        if (fromButton) {
+            if (!confirm("Are you sure to remove data?")) return;
+        }
+        this.getTableData();
+
+        for (let i = this.players.size - 1; i >= 0; i--) {
+            this.removeTableColumn(i)
+        }
+        for (let j = (this.getCurrentRound() ?? 1) - 1; j >= 0; j--) {
+            this.removeBattleRound(j);
+        }
+        this.addBattleRounds(5);
+        this.addTableColumn(5);
     }
 
     writeClipboard(text: string): Promise<void> {
