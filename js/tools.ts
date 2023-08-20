@@ -44,6 +44,14 @@ export class Tools {
         const clearData = document.getElementById("cleardata");
         if (!clearData) throw new Error("A button which has an id named cleardata not found");
         clearData.addEventListener("click", () => this.clearData(true));
+
+        const downloadJSON = document.getElementById("downloadjson");
+        if (!downloadJSON) throw new Error("An anchor which has an id named downloadjson not found");
+        downloadJSON.addEventListener("click", () => this.downloadAsJSON());
+
+        const downloadCSV = document.getElementById("downloadcsv");
+        if (!downloadJSON) throw new Error("An anchor which has an id named downloadcsv not found");
+        downloadJSON.addEventListener("click", () => this.downloadAsCSV());
     }
 
     getTableElement(): HTMLElement {
@@ -457,13 +465,70 @@ export class Tools {
         this.getTableData();
 
         for (let i = this.players.size - 1; i >= 0; i--) {
-            this.removeTableColumn(i)
+            this.removeTableColumn(i);
         }
         for (let j = (this.getCurrentRound() ?? 1) - 1; j >= 0; j--) {
             this.removeBattleRound(j);
         }
         this.addBattleRounds(5);
         this.addTableColumn(5);
+    }
+
+    toJSON(): Record<number, IPlayerData> {
+        this.getTableData();
+        const result: Record<number, IPlayerData> = {};
+
+        for (const [index, player] of this.players.entries()) {
+            result[index] = player;
+        }
+
+        return result;
+    }
+
+    toCSV(): string {
+        const currentRound = this.players.reduce((p, c) => Math.max(p, c.rounds.length), 1);
+        let result = "name,index,status";
+
+        for (let i = 1; i <= currentRound; i++) {
+            result += `,round${i.toString(10)}`;
+        }
+
+        for (const p of this.players.values()) {
+            result += "\r\n";
+            const text: string[] = [p.name, p.index.toString(), p.status];
+            for (const r of p.rounds) {
+                text.push(r.toString(10));
+            }
+            result += text.join(",");
+        }
+        return result;
+    }
+
+    downloadAsJSON() {
+        const blob = new Blob([JSON.stringify(this.toJSON(), null, 0)], { type: "application/json" });
+        const downloadElement = document.getElementById("downloadjson");
+        if (!this.isAnchorElement(downloadElement)) throw new Error("download button not found");
+        const localizedDate = new Date(Date.now() - new Date().getTimezoneOffset() * 60 * 1000)
+            .toISOString()
+            .split(".")[0]!
+            .replace(/[^\d]/g, "");
+
+        downloadElement.href = URL.createObjectURL(blob);
+        downloadElement.download = localizedDate + "womf_table.json";
+    }
+
+    downloadAsCSV() {
+        const bom = new Uint8Array([0xef, 0xbb, 0xbf]);
+        const blob = new Blob([bom, this.toCSV()], { type: "text/csv" });
+        const downloadElement = document.getElementById("downloadcsv");
+        if (!this.isAnchorElement(downloadElement)) throw new Error("download button not found");
+        const localizedDate = new Date(Date.now() - new Date().getTimezoneOffset() * 60 * 1000)
+            .toISOString()
+            .split(".")[0]!
+            .replace(/[^\d]/g, "");
+
+        downloadElement.href = URL.createObjectURL(blob);
+        downloadElement.download = localizedDate + "womf_table.csv";
     }
 
     writeClipboard(text: string): Promise<void> {
@@ -484,6 +549,10 @@ export class Tools {
 
     isValidStatus(status: string | null): status is IPlayerData["status"] {
         return status === "Playing" || status === "Eliminated";
+    }
+
+    isAnchorElement(element: Element | null): element is HTMLAnchorElement {
+        return element?.tagName === "A";
     }
 }
 

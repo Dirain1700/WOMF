@@ -167,7 +167,7 @@ p.status {
     text-align: center;
 }
 
-button.button.tool {
+.button.tool {
     font-family: "Noto Sans JP", sans-serif;
     display: inline-block;
 
@@ -194,7 +194,13 @@ div#toolbox {
     margin: 0 0 15px 0;
 }
 
-div#toolbox div.infobox {
+div#files {
+    width: 100%;
+    margin: 20px 0 15px 0;
+}
+
+div#toolbox div.infobox,
+div#files div.infobox {
     width: 90%;
     height: 80px;
     padding: 8px 12px 0 12px;
@@ -206,7 +212,13 @@ div#toolbox div.infobox {
     overflow-x: scroll;
 }
 
-div#toolbox ul li {
+div#files div.infobox {
+    height: 60px;
+    padding: 0;
+}
+
+div#toolbox li,
+div#files li {
     align-items: center;
     padding: 10px 0;
     margin: 10px 8px;
@@ -217,13 +229,18 @@ div#toolbox ul li {
     white-space: normal;
 }
 
-div#toolbox ul {
+div#files li {
+    margin: 4px 15px 0 15px;
+}
+
+div#toolbox ul,
+div#files ul {
     list-style-type: none;
     text-align: center;
     white-space: nowrap;
 }
 
-div#toolbox ul li button {
+div#toolbox button div#files a.button {
     margin: 0;
 }
 
