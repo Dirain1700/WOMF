@@ -10,6 +10,7 @@ export class Tools {
         "</tr>",
     ].join("\n");
     pointInput = '<td width="80px"><input type="text" class="point"></td>';
+    disabledPointInput = '<td width="80px"><input type="text" class="disabled-point" disabled></td>';
     players = new Collection<number, IPlayerData>();
     playersElement = new Collection<number, NodeListOf<HTMLTableCellElement>>();
 
@@ -405,8 +406,9 @@ export class Tools {
                 }
             } else {
                 for (let k = 0; k < rounds; k++) {
+                    const isEliminated = tableRowElements[i]!.querySelector("td > p.status")?.textContent === "Eliminated";
                     if (k !== 0) tableRowElements[i]!.insertAdjacentHTML("beforeend", "\n");
-                    tableRowElements[i]!.insertAdjacentHTML("beforeend", this.pointInput);
+                    tableRowElements[i]!.insertAdjacentHTML("beforeend", isEliminated ? this.disabledPointInput : this.pointInput);
                 }
             }
         }
