@@ -120,7 +120,6 @@ export class Tools {
                     if (itemElement.value && itemElement.value !== "-") {
                         const possibleInteger = parseInt(itemElement.value, 10);
                         if (Number.isNaN(possibleInteger)) {
-                            alert("Please enter a valid number.");
                             this.players.delete(currentIndex);
                             break;
                         }
