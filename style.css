@@ -209,7 +209,7 @@ div#files div.infobox {
     display: inline-block;
     align-items: center;
     white-space: nowrap;
-    overflow-x: scroll;
+    overflow-x: auto;
 }
 
 div#files div.infobox {
