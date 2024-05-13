@@ -294,7 +294,10 @@ export class Tools {
     updatePlayerList(fromButton?: boolean): void {
         const playerListElement = document.getElementById("players");
         if (!playerListElement) throw new Error("Could not update players");
-        const players = this.players.filter((p) => !this.isEmptyName(p.name) && p.status === "Playing");
+        let players = this.players.filter((p) => !this.isEmptyName(p.name) && p.status === "Playing");
+        if (!players.size && this.players.every((p) => p.status === "Eliminated")) {
+            players = this.players;
+        }
         const possibleRound = players.reduce((p, c) => Math.max(p, c.rounds.length), 1);
         const round =
             players.every((p) => p.rounds.length === players.first()!.rounds.length) && players.first()?.rounds.length
