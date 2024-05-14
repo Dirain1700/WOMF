@@ -295,8 +295,10 @@ export class Tools {
         const playerListElement = document.getElementById("players");
         if (!playerListElement) throw new Error("Could not update players");
         let players = this.players.filter((p) => !this.isEmptyName(p.name) && p.status === "Playing");
+        let ended = false;
         if (!players.size && this.players.every((p) => p.status === "Eliminated")) {
             players = this.players;
+            ended = true;
         }
         const possibleRound = players.reduce((p, c) => Math.max(p, c.rounds.length), 1);
         const round =
@@ -305,11 +307,7 @@ export class Tools {
                 : possibleRound;
 
         playerListElement.textContent =
-            "Round " +
-            round.toString(10) +
-            " Players (" +
-            players.size +
-            "): " +
+            (ended ? "Results: " : "Round " + round.toString(10) + " Players (" + players.size + "): ") +
             players
                 .map((p) => {
                     const sumPoint = this.addAll(p.rounds);
